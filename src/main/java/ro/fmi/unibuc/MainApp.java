@@ -4,25 +4,29 @@ package ro.fmi.unibuc;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import weka.classifiers.meta.FilteredClassifier;
+import ro.fmi.unibuc.service.ModelTrainingService;
+import ro.fmi.unibuc.service.SentimentModelEvaluationService;
+import ro.fmi.unibuc.service.data.EvaluationResult;
+import ro.fmi.unibuc.service.data.TrainingResult;
 
 @SpringBootApplication
 public class MainApp implements CommandLineRunner {
-    private final ModelTrainingService service;
+    private final ModelTrainingService trainingService;
+    private final SentimentModelEvaluationService evaluationService;
 
-    public MainApp(ModelTrainingService service) {
-        this.service = service;
+    public MainApp(ModelTrainingService trainingService, SentimentModelEvaluationService evaluationService) {
+        this.trainingService = trainingService;
+        this.evaluationService = evaluationService;
     }
 
     @Override
     public void run(String... args) {
         System.out.println("Hello Text Mining World");
 
-        final FilteredClassifier classifier = service.trainModel();
+        final TrainingResult trainingResult =  trainingService.trainModel();
+        final EvaluationResult evaluationResult = evaluationService.evaluatePositive(trainingResult);
 
-        if (classifier != null) {
-            System.out.println("SUCCESS!");
-        }
+        System.out.println("Thank you!");
     }
 
     public static void main(String[] args) {

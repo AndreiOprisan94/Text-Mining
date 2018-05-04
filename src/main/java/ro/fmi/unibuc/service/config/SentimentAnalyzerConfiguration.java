@@ -1,4 +1,4 @@
-package ro.fmi.unibuc;
+package ro.fmi.unibuc.service.config;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +20,11 @@ public class SentimentAnalyzerConfiguration {
     @Value("${negativeFilesPath}")
     private String negativeFilesPath;
 
+    @Value("${positiveTestPath}")
+    private String positiveTestPath;
+
+    @Value("${negativeTestPath}")
+    private String negativeTestPath;
 
     @Bean
     public List<File> positiveFiles() {
@@ -33,6 +38,22 @@ public class SentimentAnalyzerConfiguration {
     public List<File> negativeFiles() {
         final File negativeDir = new File(negativeFilesPath);
         final List<File> files = Arrays.asList(negativeDir.listFiles());
+
+        return files;
+    }
+
+    @Bean
+    public List<File> positiveTestFiles() {
+        final File positiveTestDir = new File(positiveTestPath);
+        final List<File> files = Arrays.asList(positiveTestDir.listFiles());
+
+        return files;
+    }
+
+    @Bean
+    public List<File> negativeTestFiles() {
+        final File negativeTestDir = new File(negativeTestPath);
+        final List<File> files = Arrays.asList(negativeTestDir.listFiles());
 
         return files;
     }

@@ -1,8 +1,10 @@
-package ro.fmi.unibuc;
+package ro.fmi.unibuc.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ro.fmi.unibuc.service.factory.SentimentAnalyzerFactory;
+import ro.fmi.unibuc.service.data.TrainingResult;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.DenseInstance;
 import weka.core.Instances;
@@ -29,7 +31,7 @@ public final class ModelTrainingService {
         this.negativeFiles = negativeFiles;
     }
 
-    public FilteredClassifier trainModel() {
+    public TrainingResult trainModel() {
         logger.info("Training Model with {} of negative files and {} of positive files", negativeFiles.size(), positiveFiles.size());
 
         final Instances data = addDenseInstances(factory.createData());
@@ -39,7 +41,7 @@ public final class ModelTrainingService {
 
         logger.info("Model Build with success!");
 
-        return classifier;
+        return TrainingResult.of(classifier, data);
     }
 
     private Instances addDenseInstances(Instances data) {
