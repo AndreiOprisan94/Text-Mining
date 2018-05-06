@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import ro.fmi.unibuc.ml.sentimentanalysis.model.SentimentAnalysisProjectResult;
-import ro.fmi.unibuc.ml.sentimentanalysis.persister.EvaluationResultPersister;
 import ro.fmi.unibuc.ml.sentimentanalysis.service.ModelTrainingService;
 import ro.fmi.unibuc.ml.sentimentanalysis.service.SentimentModelEvaluationService;
 import ro.fmi.unibuc.ml.sentimentanalysis.service.data.EvaluationResult;
 import ro.fmi.unibuc.ml.sentimentanalysis.service.data.TrainingResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.persister.EvaluationResultPersister;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "ro.fmi.unibuc.ml.sentimentanalysis")

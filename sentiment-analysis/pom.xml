@@ -2,33 +2,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ro.fmi.unibuc</groupId>
-    <artifactId>text-mining</artifactId>
+    <artifactId>sentiment-analysis</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
 
     <properties>
         <project.java.version>1.8</project.java.version>
         <project.maven.compiler.plugin.version>3.1</project.maven.compiler.plugin.version>
-        <project.sentiment-analysis.version>1.0</project.sentiment-analysis.version>
-        <project.sl4j.version>1.7.25</project.sl4j.version>
+        <project.spring.boot.version>2.0.1.RELEASE</project.spring.boot.version>
+        <project.weka.version>3.8.0</project.weka.version>
+        <project.apache.commons.io.version>2.6</project.apache.commons.io.version>
+        <project.apache.commons.version>3.7</project.apache.commons.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>ro.fmi.unibuc</groupId>
-            <artifactId>sentiment-analysis</artifactId>
-            <version>${project.sentiment-analysis.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/sentiment-analysis/target/sentiment-analysis-${project.sentiment-analysis.version}.jar</systemPath>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${project.spring.boot.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${project.sl4j.version}</version>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>${project.weka.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${project.apache.commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${project.apache.commons.version}</version>
         </dependency>
     </dependencies>
 
