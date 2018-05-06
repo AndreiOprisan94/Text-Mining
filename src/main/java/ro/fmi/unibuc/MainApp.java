@@ -24,7 +24,8 @@ public class MainApp implements CommandLineRunner {
         System.out.println("Hello Text Mining World");
 
         final TrainingResult trainingResult =  trainingService.trainModel();
-        final EvaluationResult evaluationResult = evaluationService.evaluatePositive(trainingResult);
+        evaluationService.evaluatePositive(trainingResult);
+        evaluationService.evaluateNegatives(trainingResult);
 
         System.out.println("Thank you!");
     }

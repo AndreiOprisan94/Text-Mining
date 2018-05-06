@@ -31,18 +31,37 @@ public final class SentimentModelEvaluationService {
         this.negativeTestFiles = negativeTestFiles;
     }
 
-    public EvaluationResult evaluatePositive(TrainingResult result) {
-        logger.info("Evaluating positive test data with {} test files", positiveTestFile.size());
+    public EvaluationResult evaluatePositive(TrainingResult trainingResult) {
+        logger.info("Evaluating POSITIVE test data with {} test files", positiveTestFile.size());
+
+        final EvaluationResult evaluationResult = evaluate(trainingResult, positiveTestFile);
+
+        logger.info("From {} POSITIVE test files, there were {} predicted as POSITIVE and {} predicted as NEGATIVE",
+                positiveTestFile.size(), evaluationResult.getNumberOfPositives(), evaluationResult.getNumberOfNegatives());
+
+        return evaluationResult;
+    }
+
+    public EvaluationResult evaluateNegatives(TrainingResult trainingResult) {
+        logger.info("Evaluating NEGATIVE test data with {} test files", negativeTestFiles.size());
+
+        final EvaluationResult evaluationResult = evaluate(trainingResult, negativeTestFiles);
+
+        logger.info("From {} NEGATIVE test files, there were {} predicted as NEGATIVE and {} predicted as POSITIVE",
+                negativeTestFiles.size(), evaluationResult.getNumberOfNegatives(), evaluationResult.getNumberOfPositives());
+
+        return evaluationResult;
+    }
+
+    private EvaluationResult evaluate(final TrainingResult trainingResult, final List<File> testFiles) {
         final EvaluationResult.Builder builder = EvaluationResult.builder();
-        int truePositives = 0;
-        int falseNegative = 0;
 
         try {
-            for (File file : positiveTestFile) {
+            for (File file : testFiles) {
                 final Scanner scanner = new Scanner(file).useDelimiter(delimiter);
                 final String fileContent = scanner.next();
 
-                final Instances data  = result.getData();
+                final Instances data = trainingResult.getData();
                 double[] value = new double[data.numAttributes()];
                 value[0] = data.attribute(0).addStringValue(fileContent);
 
@@ -50,13 +69,11 @@ public final class SentimentModelEvaluationService {
                 data.setClassIndex(1);
                 classificationInstance.setDataset(data);
 
-                final double prediction = result.getClassifier().classifyInstance(classificationInstance);
+                final double prediction = trainingResult.getClassifier().classifyInstance(classificationInstance);
 
                 if (prediction == 0) {
-                    falseNegative++;
                     builder.withResult(file.getName(), NEGATIVE);
                 } else {
-                    truePositives++;
                     builder.withResult(file.getName(), POSITIVE);
                 }
 
@@ -68,9 +85,6 @@ public final class SentimentModelEvaluationService {
         }
 
         final EvaluationResult evaluationResult = builder.build();
-
-        logger.info("From {} positive test files, there were {} predicted as POSITIVE and {} predicted as NEGATIVE",
-                positiveTestFile.size(), evaluationResult.getNumberOfPositives(), evaluationResult.getNumberOfNegatives());
 
         return evaluationResult;
     }
