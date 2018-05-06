@@ -8,12 +8,9 @@ import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
 import weka.core.Instances;
-import weka.core.stemmers.LovinsStemmer;
 import weka.core.stemmers.Stemmer;
-import weka.core.stopwords.Rainbow;
 import weka.core.stopwords.StopwordsHandler;
 import weka.core.tokenizers.Tokenizer;
-import weka.core.tokenizers.WordTokenizer;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public final class SentimentAnalyzerFactory {
     private final Stemmer stemmer;
     private final Tokenizer tokenizer;
 
-    public SentimentAnalyzerFactory(StopwordsHandler stopwords, Stemmer stemmer, Tokenizer tokenizer) {
+    SentimentAnalyzerFactory(StopwordsHandler stopwords, Stemmer stemmer, Tokenizer tokenizer) {
         this.stopwords = stopwords;
         this.stemmer = stemmer;
         this.tokenizer = tokenizer;
@@ -65,9 +62,9 @@ public final class SentimentAnalyzerFactory {
 
     public FilteredClassifier createClassifier(Instances data, StringToWordVector filter) {
         final FilteredClassifier classifier = new FilteredClassifier();
-        final Classifier naiveBayesMultinomial = new NaiveBayes();
+        final Classifier naiveBayes = new NaiveBayes();
         classifier.setFilter(filter);
-        classifier.setClassifier(naiveBayesMultinomial);
+        classifier.setClassifier(naiveBayes);
 
         logger.info("Building Naive Bayes Classifier");
 

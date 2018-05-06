@@ -62,6 +62,16 @@ public class SentimentAnalyzerConfiguration {
     }
 
     @Bean
+    public String fileDelimiter() {
+        return "\\A";
+    }
+
+    @Bean
+    public Double denseInstanceWeight() {
+        return 1.0d;
+    }
+
+    @Bean
     public StopwordsHandler stopwords() {
         return new Rainbow();
     }
@@ -75,4 +85,5 @@ public class SentimentAnalyzerConfiguration {
     public Tokenizer tokenizer() {
         return new WordTokenizer();
     }
+
 }

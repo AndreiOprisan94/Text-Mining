@@ -18,15 +18,13 @@ import static ro.fmi.unibuc.service.data.EvaluationResult.Sentiment.NEGATIVE;
 import static ro.fmi.unibuc.service.data.EvaluationResult.Sentiment.POSITIVE;
 
 @Service
-public final class SentimentModelEvaluationService {
+public final class SentimentModelEvaluationService extends AbstractSentimentAnalyzerService {
     private static final Logger logger = LoggerFactory.getLogger(SentimentModelEvaluationService.class);
-    private static final String delimiter = "\\A";
-    private static final double denseInstanceWeight = 1.0;
 
     private final List<File> positiveTestFile;
     private final List<File> negativeTestFiles;
 
-    public SentimentModelEvaluationService(List<File> positiveTestFiles, List<File> negativeTestFiles) {
+    SentimentModelEvaluationService(List<File> positiveTestFiles, List<File> negativeTestFiles) {
         this.positiveTestFile = positiveTestFiles;
         this.negativeTestFiles = negativeTestFiles;
     }
@@ -58,7 +56,7 @@ public final class SentimentModelEvaluationService {
 
         try {
             for (File file : testFiles) {
-                final Scanner scanner = new Scanner(file).useDelimiter(delimiter);
+                final Scanner scanner = new Scanner(file).useDelimiter(fileDelimiter);
                 final String fileContent = scanner.next();
 
                 final Instances data = trainingResult.getData();

@@ -16,16 +16,14 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public final class ModelTrainingService {
+public final class ModelTrainingService extends AbstractSentimentAnalyzerService {
     private static final Logger logger = LoggerFactory.getLogger(ModelTrainingService.class);
-    private static final String delimiter = "\\A";
-    private static final double denseInstanceWeight = 1.0;
 
     private final SentimentAnalyzerFactory factory;
     private final List<File> positiveFiles;
     private final List<File> negativeFiles;
 
-    public ModelTrainingService(SentimentAnalyzerFactory factory, List<File> positiveFiles, List<File> negativeFiles) {
+    ModelTrainingService(SentimentAnalyzerFactory factory, List<File> positiveFiles, List<File> negativeFiles) {
         this.factory = factory;
         this.positiveFiles = positiveFiles;
         this.negativeFiles = negativeFiles;
@@ -56,7 +54,7 @@ public final class ModelTrainingService {
     private Instances addDenseInstances(List<File> files, Instances data, int secondValue) {
         try {
             for (File file : files) {
-                final Scanner scanner = new Scanner(file).useDelimiter(delimiter);
+                final Scanner scanner = new Scanner(file).useDelimiter(fileDelimiter);
                 final String fileContent = scanner.next();
                 double[] value = new double[data.numAttributes()];
                 value[0] = data.attribute(0).addStringValue(fileContent);
