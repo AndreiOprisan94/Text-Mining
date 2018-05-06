@@ -45,22 +45,22 @@ public final class ModelTrainingService {
     }
 
     private Instances addDenseInstances(Instances data) {
-        data = addDenseInstances(positiveFiles, data);
-        data = addDenseInstances(negativeFiles, data);
+        data = addDenseInstances(positiveFiles, data, 1);
+        data = addDenseInstances(negativeFiles, data, 0);
 
         data.setClassIndex(1);
 
         return data;
     }
 
-    private Instances addDenseInstances(List<File> files, Instances data) {
+    private Instances addDenseInstances(List<File> files, Instances data, int secondValue) {
         try {
             for (File file : files) {
                 final Scanner scanner = new Scanner(file).useDelimiter(delimiter);
                 final String fileContent = scanner.next();
                 double[] value = new double[data.numAttributes()];
                 value[0] = data.attribute(0).addStringValue(fileContent);
-                value[1] = 0;
+                value[1] = secondValue;
                 final DenseInstance denseInstance = new DenseInstance(denseInstanceWeight, value);
                 data.add(denseInstance);
                 data.setClassIndex(1);
