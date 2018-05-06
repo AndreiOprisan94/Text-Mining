@@ -3,6 +3,9 @@ package ro.fmi.unibuc.service.data;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.LF;
+
 public final class EvaluationResult {
     private final Map<String, Sentiment> sentimentMap;
 
@@ -20,6 +23,19 @@ public final class EvaluationResult {
         return sentimentMap.values().stream()
                 .filter(sentiment -> sentiment.equals(Sentiment.NEGATIVE))
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return sentimentMap.entrySet().stream()
+                .map(this::makeEntryString)
+                .reduce(EMPTY, (lhs, rhs) -> lhs.concat(LF).concat(rhs).concat(LF));
+    }
+
+    private String makeEntryString(final Map.Entry<String, Sentiment> entry) {
+        final String format = "Review %s was predicted as %s";
+
+        return String.format(format, entry.getKey(), entry.getValue().toString());
     }
 
     public static Builder builder() {

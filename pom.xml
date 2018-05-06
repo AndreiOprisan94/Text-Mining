@@ -13,6 +13,8 @@
         <project.spring.boot.version>2.0.1.RELEASE</project.spring.boot.version>
         <project.weka.version>3.8.0</project.weka.version>
         <project.maven.compiler.plugin.version>3.1</project.maven.compiler.plugin.version>
+        <project.apache.commons.io.version>2.6</project.apache.commons.io.version>
+        <project.apache.commons.version>3.7</project.apache.commons.version>
     </properties>
 
     <dependencies>
@@ -26,6 +28,18 @@
             <groupId>nz.ac.waikato.cms.weka</groupId>
             <artifactId>weka-stable</artifactId>
             <version>${project.weka.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${project.apache.commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${project.apache.commons.version}</version>
         </dependency>
     </dependencies>
 
