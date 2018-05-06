@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import weka.core.stemmers.LovinsStemmer;
+import weka.core.stemmers.Stemmer;
 import weka.core.stopwords.Rainbow;
+import weka.core.stopwords.StopwordsHandler;
+import weka.core.tokenizers.Tokenizer;
 import weka.core.tokenizers.WordTokenizer;
 
 import java.io.File;
@@ -59,17 +62,17 @@ public class SentimentAnalyzerConfiguration {
     }
 
     @Bean
-    public Rainbow stopwords() {
+    public StopwordsHandler stopwords() {
         return new Rainbow();
     }
 
     @Bean
-    public LovinsStemmer stemmer() {
+    public Stemmer stemmer() {
         return new LovinsStemmer();
     }
 
     @Bean
-    public WordTokenizer tokenizer() {
+    public Tokenizer tokenizer() {
         return new WordTokenizer();
     }
 }

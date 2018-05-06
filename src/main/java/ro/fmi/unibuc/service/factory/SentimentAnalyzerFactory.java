@@ -4,12 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import weka.classifiers.Classifier;
-import weka.classifiers.bayes.NaiveBayesMultinomial;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.stemmers.LovinsStemmer;
+import weka.core.stemmers.Stemmer;
 import weka.core.stopwords.Rainbow;
+import weka.core.stopwords.StopwordsHandler;
+import weka.core.tokenizers.Tokenizer;
 import weka.core.tokenizers.WordTokenizer;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
@@ -21,11 +24,11 @@ import java.util.List;
 public final class SentimentAnalyzerFactory {
     private static final Logger logger = LoggerFactory.getLogger(SentimentAnalyzerFactory.class);
 
-    private final Rainbow stopwords;
-    private final LovinsStemmer stemmer;
-    private final WordTokenizer tokenizer;
+    private final StopwordsHandler stopwords;
+    private final Stemmer stemmer;
+    private final Tokenizer tokenizer;
 
-    public SentimentAnalyzerFactory(Rainbow stopwords, LovinsStemmer stemmer, WordTokenizer tokenizer) {
+    public SentimentAnalyzerFactory(StopwordsHandler stopwords, Stemmer stemmer, Tokenizer tokenizer) {
         this.stopwords = stopwords;
         this.stemmer = stemmer;
         this.tokenizer = tokenizer;
@@ -62,7 +65,7 @@ public final class SentimentAnalyzerFactory {
 
     public FilteredClassifier createClassifier(Instances data, StringToWordVector filter) {
         final FilteredClassifier classifier = new FilteredClassifier();
-        final Classifier naiveBayesMultinomial = new NaiveBayesMultinomial();
+        final Classifier naiveBayesMultinomial = new NaiveBayes();
         classifier.setFilter(filter);
         classifier.setClassifier(naiveBayesMultinomial);
 
