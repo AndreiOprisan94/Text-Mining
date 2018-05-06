@@ -11,8 +11,8 @@
     <version>1.0</version>
 
     <properties>
-        <project.java.version>1.8</project.java.version>
-        <project.maven.compiler.plugin.version>3.1</project.maven.compiler.plugin.version>
+        <project.java.version>10</project.java.version>
+        <project.maven.compiler.version>3.7.0</project.maven.compiler.version>
         <project.spring.boot.version>2.0.1.RELEASE</project.spring.boot.version>
         <project.weka.version>3.8.0</project.weka.version>
         <project.apache.commons.io.version>2.6</project.apache.commons.io.version>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${project.maven.compiler.plugin.version}</version>
+                <version>${project.maven.compiler.version}</version>
                 <configuration>
                     <source>${project.java.version}</source>
                     <target>${project.java.version}</target>
