@@ -1,11 +1,12 @@
-package ro.fmi.unibuc.persister;
+package ro.fmi.unibuc.ml.sentimentanalysis.persister;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ro.fmi.unibuc.service.data.EvaluationResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.persister.EvaluationResultPersister;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.data.EvaluationResult;
 
 import java.io.File;
 import java.io.IOException;

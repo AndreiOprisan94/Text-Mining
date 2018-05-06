@@ -1,10 +1,10 @@
-package ro.fmi.unibuc.service;
+package ro.fmi.unibuc.ml.sentimentanalysis.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ro.fmi.unibuc.service.factory.SentimentAnalyzerFactory;
-import ro.fmi.unibuc.service.data.TrainingResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.factory.SentimentAnalyzerFactory;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.data.TrainingResult;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.DenseInstance;
 import weka.core.Instances;

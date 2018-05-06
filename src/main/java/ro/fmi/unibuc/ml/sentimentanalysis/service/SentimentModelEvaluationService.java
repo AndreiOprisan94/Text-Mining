@@ -1,11 +1,11 @@
-package ro.fmi.unibuc.service;
+package ro.fmi.unibuc.ml.sentimentanalysis.service;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ro.fmi.unibuc.service.data.EvaluationResult;
-import ro.fmi.unibuc.service.data.TrainingResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.data.EvaluationResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.data.TrainingResult;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -13,9 +13,6 @@ import weka.core.Instances;
 import java.io.File;
 import java.util.List;
 import java.util.Scanner;
-
-import static ro.fmi.unibuc.service.data.EvaluationResult.Sentiment.NEGATIVE;
-import static ro.fmi.unibuc.service.data.EvaluationResult.Sentiment.POSITIVE;
 
 @Service
 public final class SentimentModelEvaluationService extends AbstractSentimentAnalyzerService {
@@ -70,9 +67,9 @@ public final class SentimentModelEvaluationService extends AbstractSentimentAnal
                 final double prediction = trainingResult.getClassifier().classifyInstance(classificationInstance);
 
                 if (prediction == 0) {
-                    builder.withResult(file.getName(), NEGATIVE);
+                    builder.withResult(file.getName(), EvaluationResult.Sentiment.NEGATIVE);
                 } else {
-                    builder.withResult(file.getName(), POSITIVE);
+                    builder.withResult(file.getName(), EvaluationResult.Sentiment.POSITIVE);
                 }
 
                 scanner.close();

@@ -1,6 +1,6 @@
-package ro.fmi.unibuc.persister;
+package ro.fmi.unibuc.ml.sentimentanalysis.persister;
 
-import ro.fmi.unibuc.service.data.EvaluationResult;
+import ro.fmi.unibuc.ml.sentimentanalysis.service.data.EvaluationResult;
 
 public interface EvaluationResultPersister {
     boolean persistPositiveTest(EvaluationResult evaluationResult);

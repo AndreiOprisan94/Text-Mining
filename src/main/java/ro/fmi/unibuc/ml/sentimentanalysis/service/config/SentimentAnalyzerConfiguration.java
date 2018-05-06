@@ -1,4 +1,4 @@
-package ro.fmi.unibuc.service.config;
+package ro.fmi.unibuc.ml.sentimentanalysis.service.config;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class SentimentAnalyzerConfiguration {
+class SentimentAnalyzerConfiguration {
     @Value("${positiveFilesPath}")
     private String positiveFilesPath;
 

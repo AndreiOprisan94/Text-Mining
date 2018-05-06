@@ -1,4 +1,4 @@
-package ro.fmi.unibuc.service.data;
+package ro.fmi.unibuc.ml.sentimentanalysis.service.data;
 
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;

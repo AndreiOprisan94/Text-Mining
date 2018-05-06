@@ -1,4 +1,4 @@
-package ro.fmi.unibuc.service.factory;
+package ro.fmi.unibuc.ml.sentimentanalysis.service.factory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

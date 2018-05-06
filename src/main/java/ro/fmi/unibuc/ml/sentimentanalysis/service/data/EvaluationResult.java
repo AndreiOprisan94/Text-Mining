@@ -1,4 +1,4 @@
-package ro.fmi.unibuc.service.data;
+package ro.fmi.unibuc.ml.sentimentanalysis.service.data;
 
 import java.util.HashMap;
 import java.util.Map;
